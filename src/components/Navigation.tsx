@@ -78,21 +78,24 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
-            />
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="fixed inset-0 bg-background z-[70]"
-            >
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+          />
+        )}
+        {isOpen && (
+          <motion.div
+            key="menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="fixed inset-0 bg-background z-[70]"
+          >
               <div className="flex flex-col items-center justify-center h-full px-8">
                 <button
                   onClick={() => setIsOpen(false)}
@@ -147,8 +150,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
                 </div>
               </div>
             </motion.div>
-          </>
-        )}
+          )}
       </AnimatePresence>
     </header>
   );
