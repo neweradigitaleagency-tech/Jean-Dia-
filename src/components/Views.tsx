@@ -41,7 +41,8 @@ export function HomeView() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="font-serif text-6xl md:text-8xl text-on-background mb-4 tracking-tighter"
+            className="font-serif text-6xl md:text-8xl text-[#EDE8DC] mb-4 tracking-tighter"
+            style={{ textShadow: '0 2px 25px rgba(0,0,0,0.7), 0 0 50px rgba(0,0,0,0.4)' }}
           >
             Jean Dia
           </motion.h1>
@@ -49,7 +50,8 @@ export function HomeView() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="font-sans text-xs tracking-[0.3em] font-semibold opacity-60 uppercase"
+            className="font-sans text-xs tracking-[0.3em] font-semibold text-[#EDE8DC] uppercase"
+            style={{ textShadow: '0 2px 25px rgba(0,0,0,0.7), 0 0 50px rgba(0,0,0,0.4)' }}
           >
             {t('home.hero.title')}
           </motion.p>
