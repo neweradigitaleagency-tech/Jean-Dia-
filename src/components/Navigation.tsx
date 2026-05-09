@@ -17,9 +17,13 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
+  // Lock body scroll when mobile menu is open; restore original on unmount
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (isOpen) {
+      const original = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = original; };
+    }
   }, [isOpen]);
 
   const navLinks = [
@@ -92,6 +96,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            style={{ willChange: 'opacity' }}
           />
         )}
         {isOpen && (
@@ -101,9 +106,10 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="fixed inset-0 bg-background z-[70]"
+            className="fixed inset-0 h-[100dvh] bg-background z-[70] transform-gpu isolation-isolate"
+            style={{ willChange: 'transform, opacity' }}
           >
-              <div className="flex flex-col items-center justify-center h-full px-8">
+              <div className="flex flex-col items-center justify-center h-full px-8 pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)]">
                 <button
                   onClick={() => setIsOpen(false)}
                   className="absolute top-6 right-6 p-3 text-on-background hover:text-secondary transition-colors"
