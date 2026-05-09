@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #faf9f7;
+  --color-on-background: #1b1c1b;
+  --color-secondary: #b5270e;
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+  --color-surface-container: #efeeec;
+  --color-on-surface-variant: #444748;
+
+  --font-serif: "EB Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+
+  --spacing-section-gap: 160px;
+  --spacing-gutter: 32px;
+  --spacing-margin-desktop: 64px;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-background font-sans antialiased selection:bg-secondary/10;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    @apply font-serif;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(250, 249, 247, 0) 60%, rgba(250, 249, 247, 1) 100%);
+}
