@@ -5,7 +5,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Instagram, Facebook, Twitter, Linkedin, Globe } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface NavbarProps {
@@ -16,6 +16,11 @@ interface NavbarProps {
 export function Navbar({ currentPage, onPageChange }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   const navLinks = [
     { label: t('nav.gallery'), id: 'gallery' },
@@ -51,6 +56,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
           
           <div className="flex items-center gap-2 ml-4">
             <button 
+              translate="no"
               onClick={() => setLanguage('fr')}
               className={`font-sans text-[10px] uppercase tracking-widest font-semibold transition-colors ${language === 'fr' ? 'text-secondary' : 'opacity-40 hover:opacity-100'}`}
             >
@@ -58,6 +64,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
             </button>
             <span className="opacity-20 text-[10px]">/</span>
             <button 
+              translate="no"
               onClick={() => setLanguage('en')}
               className={`font-sans text-[10px] uppercase tracking-widest font-semibold transition-colors ${language === 'en' ? 'text-secondary' : 'opacity-40 hover:opacity-100'}`}
             >
@@ -123,6 +130,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
                 <div className="absolute bottom-16 flex flex-col items-center gap-6">
                   <div className="flex items-center gap-4">
                     <button
+                      translate="no"
                       onClick={() => setLanguage('fr')}
                       className={`text-sm font-bold tracking-[0.2em] transition-colors ${
                         language === 'fr' ? 'text-secondary' : 'text-on-background opacity-40 hover:opacity-100'
@@ -132,6 +140,7 @@ export function Navbar({ currentPage, onPageChange }: NavbarProps) {
                     </button>
                     <span className="text-on-background opacity-20">/</span>
                     <button
+                      translate="no"
                       onClick={() => setLanguage('en')}
                       className={`text-sm font-bold tracking-[0.2em] transition-colors ${
                         language === 'en' ? 'text-secondary' : 'text-on-background opacity-40 hover:opacity-100'
@@ -176,6 +185,7 @@ export function Footer() {
           <span className="opacity-20">/</span>
           <div className="flex items-center gap-2">
             <button 
+              translate="no"
               onClick={() => setLanguage('fr')}
               className={`font-sans text-[10px] uppercase tracking-[0.1em] transition-all font-semibold ${language === 'fr' ? 'text-secondary' : 'opacity-60 hover:opacity-100'}`}
             >
@@ -183,6 +193,7 @@ export function Footer() {
             </button>
             <span className="opacity-20 text-[10px]">/</span>
             <button 
+              translate="no"
               onClick={() => setLanguage('en')}
               className={`font-sans text-[10px] uppercase tracking-[0.1em] transition-all font-semibold ${language === 'en' ? 'text-secondary' : 'opacity-60 hover:opacity-100'}`}
             >
